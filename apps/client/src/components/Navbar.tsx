@@ -1,24 +1,17 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
-import { Bell, Home, ShoppingCart } from "lucide-react";
+import { Bell, Home } from "lucide-react";
 import ShoppingCartIcon from "./ShoppingCartIcon";
-import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
+import {
+    Show,
+    SignInButton,
+    SignUpButton,
+} from "@clerk/nextjs";
+
+import ProfileButton from "./ProfileButton";
 
 const Navbar = () => {
-    const { isSignedIn, isLoaded } = useAuth();
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    // Debug log
-    console.log("Navbar render:", { isLoaded, isSignedIn, mounted });
-
     return (
         <nav className="w-full flex items-center justify-between border-b border-gray-200 pb-4">
             {/* LEFT */}
@@ -39,23 +32,32 @@ const Navbar = () => {
             <div className="flex items-center gap-6">
                 <SearchBar />
                 <Link href="/">
-                    <Home className="w-4 h-4 text-gray-600" />
+                    <Home className="w-5 h-5 text-gray-600 hover:text-black transition-colors" />
                 </Link>
-                <Bell className="w-4 h-4 text-gray-600" />
+                <Bell className="w-5 h-5 text-gray-600 hover:text-black transition-colors" />
                 <ShoppingCartIcon />
 
-                {/* Simple auth buttons - always show something */}
-                <div>
-                    {isSignedIn ? (
-                        <UserButton />
-                    ) : (
-                        <SignInButton mode="modal">
-                            <span className="text-sm font-medium text-gray-700 hover:text-gray-900 cursor-pointer">
-                                Sign In
-                            </span>
+                {/* Signed Out */}
+                <Show when="signed-out">
+                    <div className="flex items-center gap-3">
+                        <SignInButton>
+                            <button className="px-5 py-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100 transition-all rounded-xl border border-gray-300">
+                                ورود
+                            </button>
                         </SignInButton>
-                    )}
-                </div>
+
+                        <SignUpButton>
+                            <button className="px-5 py-2 text-sm font-medium text-white bg-black hover:bg-gray-800 transition-all rounded-xl">
+                                ثبت‌نام
+                            </button>
+                        </SignUpButton>
+                    </div>
+                </Show>
+
+                {/* Signed In */}
+                <Show when="signed-in">
+                    <ProfileButton />
+                </Show>
             </div>
         </nav>
     );

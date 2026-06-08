@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Trendlama - Best Clothes",
+  title: "Trendlama",
   description: "Trendlama is the best place to find the best clothes",
 };
 

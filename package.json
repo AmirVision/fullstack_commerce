@@ -10,11 +10,16 @@
   },
   "devDependencies": {
     "prettier": "^3.8.3",
-    "turbo": "^2.9.8",
-    "typescript": "5.9.2"
+    "turbo": "^2.9.16",
+    "typescript": "6.0.3"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "next": "^16.2.7",
+    "nextjs": "^0.0.3",
+    "pnpm": "^11.5.2"
   }
 }
